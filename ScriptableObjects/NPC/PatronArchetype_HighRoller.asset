@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8888332da17643cfb2d2ecade7db51a0, type: 3}
+  m_Name: PatronArchetype_HighRoller
+  m_EditorClassIdentifier: 
+  archetype: 1
+  minMinMoneyThreshold: 0
+  maxMinMoneyThreshold: 500
+  minStartingMoney: 8000
+  maxStartingMoney: 10000
+  minWinningsThresholdMult: 1.1
+  maxWinningsThresholdMult: 1.25
+  minLossThresholdMult: 5000
+  maxLossThresholdMult: 10000
+  minStartingStress: 0
+  maxStartingStress: 15
+  minStressQuitLimit: 50
+  maxStressQuitLimit: 75
+  maxStressLeaveLimit: 95
+  minStressMultiplier: 0.4
+  maxStressMultiplier: 0.75
+  minTimeToSpinSeconds: 4
+  maxTimeToSpinSeconds: 8
+  stressTimeMultiplier: 0.8

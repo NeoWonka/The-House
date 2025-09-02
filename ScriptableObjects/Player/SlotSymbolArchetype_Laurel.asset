@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d184fa605f46c7870546b66287d35f, type: 3}
+  m_Name: SlotSymbolArchetype_Laurel
+  m_EditorClassIdentifier: 
+  slotSymbolType: 3
+  levelMultiplier: 1
+  isDefaultSymbol: 1
+  basePatron:
+    moneyScalar: 0
+    stressScalar: 0
+    comboMultiplier: 1
+  powerup:
+    moneyScalar: 0
+    stressScalar: -2
+    comboAdd: 0.3
+    probabilityAdd: 0.1
+  ui:
+    color: {r: 0.015686275, g: 0.5568628, b: 0, a: 0.19607843}
+    image: {fileID: 21300000, guid: 9b007711d744fcb41bfdc44ecfa6eb75, type: 3}

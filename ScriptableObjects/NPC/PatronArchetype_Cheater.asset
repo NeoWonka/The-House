@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8888332da17643cfb2d2ecade7db51a0, type: 3}
+  m_Name: PatronArchetype_Cheater
+  m_EditorClassIdentifier: 
+  archetype: 2
+  minMinMoneyThreshold: 50
+  maxMinMoneyThreshold: 150
+  minStartingMoney: 2000
+  maxStartingMoney: 5000
+  minWinningsThresholdMult: 1.5
+  maxWinningsThresholdMult: 3
+  minLossThresholdMult: 500
+  maxLossThresholdMult: 1000
+  minStartingStress: 30
+  maxStartingStress: 45
+  minStressQuitLimit: 75
+  maxStressQuitLimit: 85
+  maxStressLeaveLimit: 95
+  minStressMultiplier: 1.15
+  maxStressMultiplier: 1.75
+  minTimeToSpinSeconds: 2
+  maxTimeToSpinSeconds: 5
+  stressTimeMultiplier: 0.8
