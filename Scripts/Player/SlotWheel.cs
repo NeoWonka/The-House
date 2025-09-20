@@ -67,6 +67,7 @@ namespace Player
         public float maxHitWeight = 100.0f;
         public float mercyRule = 0.25f;
         public Spinner _spinner;
+        public static bool outcomeFound;
 
         [Header("Shapecast Debug")]
         public float shapecastSphereRadius = 0.15f;
@@ -81,6 +82,7 @@ namespace Player
          ***********************************************************************************************************************/
         private void Start()
         {
+            outcomeFound = false;
             wheelAudio = GetComponent<AudioSource>();
 
             SlotSymbolArchetypeList slotSymbolOptions = GetComponentInParent<SlotSymbolArchetypeList>();
@@ -237,6 +239,7 @@ namespace Player
         public void StartSpinning()
         {
             Debug.Log("SlotWheel::StartSpinning - Start spinning called!");
+            outcomeFound = false;
             if (_spinner is { waitingForFinalCastHit: false, waitingForFirstCastHit: false, isSpinning: false })
             {
                 _spinner.resultProbabilities.Clear();
@@ -552,19 +555,12 @@ namespace Player
                 _spinner.lastCastHit = null;
                 _spinner.guaranteeNextHit = 0.0f;
 
-                //Update UI
-                //Debug.Log("SlotWheel says symbol type is " + currentSymbol.type);
-                Debug.Log("SlotWheel says symbol image is " + currentSymbol.image);
-                //int currentWheel = SlotMachine.currentWheel;
-                //SlotMachine.resultUIContainerList[currentWheel].GetComponent<Image>().sprite = currentSymbol.image;
-
-
-
-
                 // Play VFX
                 wheelAudio.PlayOneShot(Resources.Load<AudioClip>("Audio/SFX_SlotStop"));
-            }
 
+                outcomeFound = true;
+            }
+            
             return hit;
         }
 

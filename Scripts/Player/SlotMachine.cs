@@ -144,22 +144,6 @@ namespace Player
                 Instantiate(resultUIContainer, slotSymbolUI.transform);
                 resultUIContainerList.Add(resultUIContainer);
             }
-            slotSymbolUIImgSlot = resultUIContainer.transform.GetChild(0).gameObject;
-
-            GameObject currentSlotSymbolUIImgSlot = resultUIContainerList[currentWheel].transform.GetChild(0).gameObject;
-            if (currentSlotSymbolUIImgSlot.GetComponent<Image>().sprite != null)
-            {
-                currentSlotSymbolUIImgSlot.GetComponent<Image>().sprite = null;
-            }
-
-            //Move to StopNextWheel() this successfully names each individual member of the list, and names that each member image is null. needs to be moved out of Start()
-            /*for (int i = 0; i < slotWheelScripts.Count; i++)
-            {
-                string containerName = resultUIContainerList[i].name;
-                resultUIContainerList[i].GetComponentInChildren<Image>().sprite = slotWheelScripts[i].currentSymbol.image;
-                Debug.Log(slotWheelScripts[i].currentSymbol.image);
-                Debug.Log(containerName);
-            }*/
 
             // Initialize inventory
             // TODO: Update these when player gets a powerup.
@@ -175,6 +159,20 @@ namespace Player
             if (IsAnyWheelSpinning() && Input.GetMouseButtonDown(0))
             {
                 StopNextWheel();
+
+                ////////////
+                ///Result UI
+
+                ///Line 348 and 349 produce the same image at same time in console but are both a turn behind the wheelScript results starting as null. 
+                ///UI image that shows is pulling either from last known symbol or random. Won't change in spite of the component being identified in console.
+                /*GameObject currentSlotSymbolUIImgSlot = resultUIContainerList[currentWheel].transform.GetChild(0).gameObject;
+                Sprite theImage = resultUIContainerList[currentWheel].transform.GetChild(0).gameObject.GetComponent<Image>().sprite;
+                slotWheels[currentWheel].GetComponent<SlotWheel>().currentSymbol.image = theImage;
+                Sprite theImage = slotWheelScripts[currentWheel].GetComponent<SlotWheel>().currentSymbol.image;
+                resultUIContainerList[currentWheel].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = slotWheelScripts[currentWheel].GetComponent<SlotWheel>().currentSymbol.image;
+                Debug.Log(resultUIContainerList[1].transform.GetChild(0).gameObject.GetComponent<Image>().sprite);
+                Debug.Log(slotWheelScripts[currentWheel].GetComponent<SlotWheel>().currentSymbol.image);
+                //Debug.Log(theImage);*/
             }
 
             if (Input.GetKeyDown(KeyCode.BackQuote))
@@ -200,23 +198,6 @@ namespace Player
                 }
             }
 
-            ////////////
-            ///Result UI
-            //////
-            /*for (int i = 0; i < slotWheelScripts.Count; i++)
-            {
-                string containerName = resultUIContainerList[i].name;
-                resultUIContainerList[i].GetComponentInChildren<Image>().sprite = slotWheelScripts[i].currentSymbol.image;
-                Debug.Log(slotWheelScripts[i].currentSymbol.image);
-                Debug.Log(containerName);
-            }*/
-           /* GameObject currentSlotSymbolUIImgSlot = resultUIContainerList[currentWheel].transform.GetChild(0).gameObject;
-            //slotSymbolUIImage.sprite = slotWheelScripts[currentWheel].currentSymbol.image;
-            currentSlotSymbolUIImgSlot.GetComponent<Image>().sprite = slotWheelScripts[currentWheel].currentSymbol.image;
-            //string containerName = resultUIContainerList[currentWheel].name;
-            //resultUIContainerList[currentWheel].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = slotWheelScripts[currentWheel].currentSymbol.image;
-            Debug.Log(resultUIContainerList[currentWheel].transform.GetChild(0));
-            Debug.Log(slotWheelScripts[currentWheel].currentSymbol.image); */
         }
 
         /***********************************************************************************************************************
@@ -358,9 +339,12 @@ namespace Player
             MachineLeverPullTime = DateTime.Now;
             foreach (SlotWheel slotWheelScript in slotWheelScripts)
             {
-                slotWheelScript.StartSpinning();
+                slotWheelScript.StartSpinning(); 
             }
-
+            foreach (GameObject resultUI in resultUIContainerList)
+            {
+                resultUI.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = null;
+            }
             currentWheel = 0;
         }
 
@@ -369,29 +353,18 @@ namespace Player
         /// </summary>
         public void StopNextWheel()
         {
+            
+            //Debug.Log(resultUIContainerList[currentWheel].transform.GetChild(0));
+
             if (currentWheel >= slotWheels.Count)
             {
                 Debug.LogError("SlotMachine::StopNextWheel - Wheels are all stopped");
                 return;
             }
 
-            slotWheels[currentWheel]
-                .GetComponent<SlotWheel>()
-                .StopSpinning();
 
-            ////////////
-            ///Result UI
-            //////
 
-            //GameObject currentSlotSymbolUIImgSlot = resultUIContainerList[currentWheel].transform.GetChild(0).gameObject;
-
-            if (currentSlotSymbolUIImgSlot.GetComponent<Image>().sprite = null)
-            {
-                currentSlotSymbolUIImgSlot.GetComponent<Image>().sprite = slotWheels[currentWheel - 1].GetComponent<SlotWheel>().currentSymbol.image;
-            }
-            //Debug.Log(currentSlotSymbolUIImgSlot.GetComponent<Image>().sprite);
-            Debug.Log(slotWheels[currentWheel + 1].GetComponent<SlotWheel>().currentSymbol.image);
-            Debug.Log(resultUIContainerList[currentWheel].transform.GetChild(0).gameObject);
+            slotWheels[currentWheel].GetComponent<SlotWheel>().StopSpinning();
 
             currentWheel++;
 
@@ -399,6 +372,7 @@ namespace Player
             {
                 MachineFinalWheelStopTime = DateTime.Now;
             }
+
         }
 
         /// <summary>
@@ -478,7 +452,6 @@ namespace Player
                     inventory.totalSymbolStressModifier[(int)slotWheelScript.currentSymbol.type]);
 
             }
-
             result.m_finalWheelLockTime = MachineFinalWheelStopTime;
         }
       
